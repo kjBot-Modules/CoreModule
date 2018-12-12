@@ -11,7 +11,6 @@ class AccessControlModule extends Module{
         switch($args[1]??q('缺少操作方法')){
             case 'set':
             case '设置':
-                $ac->requireLevel(AccessLevel::Master);
                 $id = parseQQ($args[2]??q('缺少 QQ 号'));
                 $level = $args[3]??q('缺少权限级别');
                 $expire = $args[4]??q('缺少到期时间');
