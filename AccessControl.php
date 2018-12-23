@@ -12,7 +12,7 @@ class AccessControl{
     private $role;
     private $defaultMaster;
 
-    public function __construct(BaseEvent $event){
+    public function __construct($event){
         global $Config;
         $this->defaultMaster = $Config['master'];
         $this->id = $event->getId();
@@ -68,8 +68,12 @@ class AccessControl{
         return DataStorage::SetData('CoreModule.AccessLevel/'.$this->id, $data);
     }
 
+    public function hasLevel(int $level){
+        return $this->getLevel() >= $level;
+    }
+
     public function requireLevel(int $level){
-        if($this->getLevel()<$level)throw new AccessDeniedException("该操作需要{$level}级的权限");
+        if(!$this->hasLevel($level))throw new AccessDeniedException("该操作需要{$level}级的权限");
     }
 
     public function is(int $level): bool{

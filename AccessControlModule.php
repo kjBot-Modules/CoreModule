@@ -15,14 +15,14 @@ class AccessControlModule extends Module{
                 $level = $args[3]??q('缺少权限级别');
                 $expire = $args[4]??q('缺少到期时间');
                 if($ac->setLevelFor($id, $level, $expire)){
-                    return sendBack("成功将 {$id} 的权限级别设置为 {$level}，到期时间是 ".(new \DateTime($expire))->format('Y-m-d H:i:s'), $event);
+                    return $event->sendBack("成功将 {$id} 的权限级别设置为 {$level}，到期时间是 ".(new \DateTime($expire))->format('Y-m-d H:i:s'));
                 }else{
-                    return sendBack('设置失败', $event);
+                    return $event->sendBack('设置失败');
                 }
             case 'get':
             case '取得':
                 $id = parseQQ($args[2]??q('缺少 QQ 号'));
-                return sendBack("{$id} 的权限级别为 {$ac->level}", $event);
+                return $event->sendBack("{$id} 的权限级别为 {$ac->level}");
             default:
                 break;
         }

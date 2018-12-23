@@ -7,7 +7,7 @@ use kjBot\Framework\Event\BaseEvent;
 class AccessControlPlugin extends Plugin{
     static $silence = false;
 
-    public function handle(BaseEvent $event){
+    public function handle($event){
         global $Config;
         $ac = new AccessControl($event);
         try{
