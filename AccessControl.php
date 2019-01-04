@@ -2,8 +2,9 @@
 namespace kjBotModule\kj415j45\CoreModule;
 
 use kjBot\Framework\Event\BaseEvent;
-use kjBot\Framework\Core\DataStorage;
+use kjBot\Framework\DataStorage;
 use kjBot\Framework\Event\MessageEvent;
+use kjBotModule\kj415j45\CoreModule\SilenceAccessDenied;
 
 class AccessControl{
     private $id;
@@ -23,16 +24,16 @@ class AccessControl{
 
     private function setLevelData($qq, int $level, $expire): bool{
         if($this->is(AccessLevel::Master) || $this->defaultMaster == $this->id){
+            _log('NOTICE', "Set {$qq}'s Level to {$level} (($expire})");
             $data = json_encode([
                 'level' => $level,
                 'expire' => (new \DateTime($expire))->format('YmdHis'),
             ]);
             return DataStorage::SetData('CoreModule.AccessLevel/'.$qq, $data);
-        }else throw new AccessDeniedException();
+        }else throw new AccessDenied("该操作需要{$level}级的权限");
     }
 
     public function setLevelFor($qq, int $level, $expire): bool{
-        _log('NOTICE', "Set {$qq}'s Level to {$level} (($expire})");
         return $this->setLevelData($qq, $level, $expire);
     }
 
@@ -73,7 +74,11 @@ class AccessControl{
     }
 
     public function requireLevel(int $level){
-        if(!$this->hasLevel($level))throw new AccessDeniedException("该操作需要{$level}级的权限");
+        if(!$this->hasLevel($level))throw new AccessDenied("该操作需要{$level}级的权限");
+    }
+
+    public function hasLevelOrDie(int $level){
+        if(!$this->hasLevel($level))throw new SilenceAccessDenied("该操作需要{$level}级的权限");
     }
 
     public function is(int $level): bool{

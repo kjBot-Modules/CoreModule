@@ -5,21 +5,21 @@ use kjBot\Framework\Plugin;
 use kjBot\Framework\Event\BaseEvent;
 
 class AccessControlPlugin extends Plugin{
-    static $silence = false;
+    public $handleQueue = true;
 
     public function handle($event){
         global $Config;
         $ac = new AccessControl($event);
         try{
-            $ac->requireLevel($Config['ACLevel']??AccessLevel::User);
-        }catch(AccessDeniedException $e){
-            static::$silence = true;
+            $ac->hasLevelOrDie($Config['ACLevel']??AccessLevel::User);
+        }catch(SilenceAccessDenied $e){
+            SilenceAccessDenied::$silence = true;
             throw $e;
         }
     }
 
     public function beforePostMessage(&$queue){
-        if(static::$silence){
+        if(SilenceAccessDenied::$silence){
             _log('NOTICE', $queue[0]);
             $queue = NULL;
         }
