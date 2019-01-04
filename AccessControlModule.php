@@ -1,14 +1,16 @@
 <?php
 namespace kjBotModule\kj415j45\CoreModule;
 
+use kjBot\SDK\CoolQ;
 use kjBot\Framework\Module;
 use kjBot\Framework\Message;
 use kjBot\Framework\Event\MessageEvent;
-use kjBot\SDK\CoolQ;
+use kjBotModule\kj415j45\CoreModule\Access;
 
 class AccessControlModule extends Module{
     public function process(array $args, MessageEvent $event): Message{
-        $ac = new AccessControl($event);
+        $ac = Access::Control($event);
+        $ac->hasLevelOrDie(AccessLevel::Master);
         switch($args[1]??q('缺少操作方法')){
             case 'set':
             case '设置':
