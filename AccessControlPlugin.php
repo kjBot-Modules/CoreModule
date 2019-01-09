@@ -8,10 +8,9 @@ class AccessControlPlugin extends Plugin{
     public $handleQueue = true;
 
     public function handle($event){
-        global $Config;
         $ac = new AccessControl($event);
         try{
-            $ac->hasLevelOrDie($Config['ACLevel']??AccessLevel::User);
+            $ac->hasLevelOrDie(Config('ACLevel', AccessLevel::User));
         }catch(SilenceAccessDenied $e){
             SilenceAccessDenied::$silence = true;
             throw $e;
