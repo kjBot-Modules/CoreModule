@@ -14,8 +14,7 @@ class AccessControl{
     private $defaultMaster;
 
     public function __construct($event){
-        global $Config;
-        $this->defaultMaster = $Config['master'];
+        $this->defaultMaster = \config('master');
         $this->id = $event->getId();
         if($event instanceof GroupMessageEvent){
             $this->role = $event->getSenderInfo()->role;
