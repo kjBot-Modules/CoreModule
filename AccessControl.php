@@ -1,9 +1,9 @@
 <?php
 namespace kjBotModule\kj415j45\CoreModule;
 
-use kjBot\Framework\Event\BaseEvent;
 use kjBot\Framework\DataStorage;
-use kjBot\Framework\Event\MessageEvent;
+use kjBot\Framework\Event\BaseEvent;
+use kjBot\Framework\Event\GroupMessageEvent;
 use kjBotModule\kj415j45\CoreModule\SilenceAccessDenied;
 
 class AccessControl{
@@ -17,8 +17,8 @@ class AccessControl{
         global $Config;
         $this->defaultMaster = $Config['master'];
         $this->id = $event->getId();
-        if($event instanceof MessageEvent){
-            $this->role = $event->getSender()->role;
+        if($event instanceof GroupMessageEvent){
+            $this->role = $event->getSenderInfo()->role;
         }
     }
 
