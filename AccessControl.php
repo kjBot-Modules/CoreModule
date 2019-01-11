@@ -29,7 +29,7 @@ class AccessControl{
                 'expire' => (new \DateTime($expire))->format('YmdHis'),
             ]);
             return DataStorage::SetData('CoreModule.AccessLevel/'.$qq, $data);
-        }else throw new AccessDenied("该操作需要4级的权限");
+        }else throw new AccessDenied('该操作需要'.AccessLevel::Master.'级的权限');
     }
 
     public function setLevelFor($qq, int $level, $expire): bool{
