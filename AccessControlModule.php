@@ -25,7 +25,7 @@ class AccessControlModule extends Module{
             case 'get':
             case '取得':
                 $id = \parseQQ($args[2]??q('缺少 QQ 号'));
-                return $event->sendBack("{$id} 的权限级别为 {$ac->level}");
+                return $event->sendBack("{$id} 的权限级别为 {$ac->getLevel()}");
             default:
                 break;
         }
