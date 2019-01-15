@@ -15,7 +15,7 @@ class AliasPlugin extends Plugin{
         if($aliasList==NULL)return;
         if(array_search(NULL, $aliasList))return;
 
-        $matches = preg_split('/\s+/', $event->getMsg());
+        $matches = parseCommand($event->getMsg());
         $command = rtrim($matches[0]);
         if($matches==NULL){
             $command = $event->getMsg();
