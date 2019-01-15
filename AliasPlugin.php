@@ -25,12 +25,20 @@ class AliasPlugin extends Plugin{
         if($aliasTarget==NULL)return;
         $str = $event->getMsg();
         d('Before alias: '.$str);
-        $str = (\str_replace_once($command, $aliasTarget, $str));
+        $str = $aliasTarget;
         $argCount = count($matches);
+        $pending = [];
         for($i = 1; $i<$argCount; $i++){
-            $str = str_replace_once(':arg'.$i, $matches[$i], $str);
+            if(strpos($str, ':arg'.$i)===false){
+                $pending[]= $matches[$i];
+                d(':arg'.$i.' not set, will be appended to tail');
+            }else{
+                $str = str_replace_once(':arg'.$i, $matches[$i], $str);
+                d('Replace :arg'.$i.': '.$str);
+            }
         }
-        $event->setMsg($str);
+        $str.= ' '.implode(' ', $pending);
         d('After alias: '.$str);
+        $event->setMsg($str);
     }
 }
