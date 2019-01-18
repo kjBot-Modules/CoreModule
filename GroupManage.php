@@ -40,6 +40,7 @@ class GroupManage{
         $msg = $this->welcomeMsg;
         $msg = str_replace('@:uid', CQCode::At($event->getId()), $msg);
         $msg = str_replace(':uid', $event->getId(), $msg);
+        $msg = str_replace('@:oid', CQCode::At($event->operatorId), $msg);
         $msg = str_replace(':oid', $event->operatorId, $msg);
         return $msg;
     }
@@ -53,6 +54,7 @@ class GroupManage{
         $msg = $this->leaveMsg;
         $msg = str_replace('@:uid', CQCode::At($event->getId()), $msg);
         $msg = str_replace(':uid', $event->getId(), $msg);
+        $msg = str_replace('@:oid', CQCode::At($event->operatorId), $msg);
         $msg = str_replace(':oid', $event->operatorId, $msg);
         return $msg;
     }
