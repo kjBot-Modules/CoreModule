@@ -9,7 +9,7 @@ class GroupManage{
     public $_enableWelcomeMsg = true;
     protected $welcomeMsg = '@:uid 欢迎加入本群，请阅读群公告！';
     public $_enableLeaveMsg = true;
-    protected $leaveMsg = '@:uid 离开了本群';
+    protected $leaveMsg = ':uid 离开了本群';
 
     protected function __construct($groupId, $data = NULL){
         $this->groupId = $groupId;
