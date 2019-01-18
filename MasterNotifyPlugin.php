@@ -33,7 +33,6 @@ class MasterNotifyPlugin extends Plugin{
     public function coolq_request_group_invite(InvitedToGroupEvent $event, CoolQ $cq){
         $uid = $event->getId();
         $gid = $event->groupId;
-        $comment = $event->comment;
         $flag = $event->getFlag();
 
         if(Config('AllowGroups', false)){
@@ -41,11 +40,11 @@ class MasterNotifyPlugin extends Plugin{
                 $event->accept($cq);
             }catch(\Exception $e){
                 _log('ERROR', export($e));
-                return notifyMaster("自动接受 {$uid} 邀请到群 {$gid} 的请求失败，信息为“{$comment}”。flag为\n{$flag}");
+                return notifyMaster("自动接受 {$uid} 邀请到群 {$gid} 的请求失败。flag为\n{$flag}");
             }
-            return notifyMaster("已自动接受 {$uid} 邀请到群 {$gid} 的请求，信息为“{$comment}”");
+            return notifyMaster("已自动接受 {$uid} 邀请到群 {$gid} 的请求");
         }else{
-            return notifyMaster("{$uid} 请求添加到群 {$gid}，信息为“{$comment}”。flag为\n{$flag}");
+            return notifyMaster("{$uid} 请求添加到群 {$gid}，flag为\n{$flag}");
         }
     }
 }
