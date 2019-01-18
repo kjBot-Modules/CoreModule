@@ -5,10 +5,15 @@ use kjBot\SDK\CoolQ;
 use kjBot\Framework\Plugin;
 use kjBot\Framework\Event\FriendRequestEvent;
 use kjBot\Framework\Event\InvitedToGroupEvent;
+use kjBot\Framework\Event\GroupDecreaseEvent;
 
 
 class MasterNotifyPlugin extends Plugin{
     public $handleDepth = 3;
+
+    public function notice_group_decrease_kick_me(GroupDecreaseEvent $event){
+        return notifyMaster("{$event->operatorId} 将我从群 {$event->groupId} 踢出");
+    }
 
     const cq_request_friend = true;
     public function coolq_request_friend(FriendRequestEvent $event, CoolQ $cq){
