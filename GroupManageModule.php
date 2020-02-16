@@ -5,7 +5,6 @@ use kjBot\Framework\Module;
 use kjBot\Framework\Event\GroupMessageEvent;
 use kjBot\Framework\DataStorage;
 
-
 class GroupManageModule extends Module{
     public function process(array $args, $event){
         if(!($event instanceof GroupMessageEvent)){

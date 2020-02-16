@@ -7,7 +7,6 @@ use kjBot\Framework\Event\FriendRequestEvent;
 use kjBot\Framework\Event\InvitedToGroupEvent;
 use kjBot\Framework\Event\GroupDecreaseEvent;
 
-
 class MasterNotifyPlugin extends Plugin{
     public $handleDepth = 3;
 
