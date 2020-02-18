@@ -12,4 +12,8 @@ class Access{
     public final static function Log(Module $module, MessageEvent $event, string $note = ''){
         return AccessLog::Log($module, $event, $note);
     }
+
+    public final static function LogForMe(Module $module, string $note = ''){
+        return AccessLog::LogForModule($module, $note);
+    }
 }

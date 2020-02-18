@@ -19,4 +19,13 @@ class AccessLog{
             "[{$time}]{$groupId} {$moduleName}: {$note}\n"
         , true);
     }
+
+    public static function LogForModule(Module $module, string $note = ''){
+        $moduleName = str_replace('\\', '.', get_class($module));
+        $time = (new DateTime('now'))->format('Y-m-d H:i:s');
+
+        return DataStorage::SetData(static::BaseDir.$moduleName,
+            "[{$time}] {$note}\n"
+        , true);
+    }
 }
