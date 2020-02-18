@@ -45,6 +45,7 @@ class AccessControl{
     }
 
     public function getLevel(): int{
+        if($this->defaultMaster == $this->id) return AccessLevel::Master; //如果是master则直接返回
         $uLevel =  $this->getLevelData();
         if($this->levelExpired($uLevel)){
             return AccessLevel::User;
