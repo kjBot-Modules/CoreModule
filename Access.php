@@ -13,7 +13,7 @@ class Access{
         return AccessLog::Log($module, $event, $note);
     }
 
-    public final static function LogForMe(Module $module, string $note = ''){
+    public final static function LogForMe($module, string $note = ''){
         return AccessLog::LogForModule($module, $note);
     }
 }
