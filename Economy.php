@@ -7,6 +7,7 @@ use kjBot\Framework\DataStorage;
 class Economy{
     const NO_MONEY = -1; //余额不足
     const UNEXPECTED_NEGATIVE_NUMBER = -2; //未期望的负值
+    const STR_NO_MONEY_HINT = '金币不足，可通过签到等方式获取';
 
     const BaseDir = 'CoreModule.Economy/';
     private $user;
