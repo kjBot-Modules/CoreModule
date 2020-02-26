@@ -30,7 +30,7 @@ class AliasPlugin extends Plugin{
         $pending = [];
         for($i = 1; $i<$argCount; $i++){
             if(strpos($str, ':arg'.$i)===false){
-                $pending[]= $matches[$i];
+                $pending[]= $matches[$i]; //FIXME 这里没有重新给含空格的参数补回引号，存在隐患，现阶段未触发
                 d(':arg'.$i.' not set, will be appended to tail');
             }else{
                 $str = str_replace_once(':arg'.$i, $matches[$i], $str);
