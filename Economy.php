@@ -16,10 +16,13 @@ class Economy{
     public function __construct($user){
         $this->user = $user;
         $this->balance = DataStorage::GetData(static::BaseDir.$user);
+        if($this->balance === false){
+            $this->balance = 0;
+        }
     }
 
-    public static function setBalance($user, int $balance){
-        return DataStorage::SetData(static::BaseDir.$user, $balance);
+    public function getBalance(){
+        return $this->balance;
     }
 
     protected function save(){
