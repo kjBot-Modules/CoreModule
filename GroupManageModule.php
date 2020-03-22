@@ -31,10 +31,10 @@ class GroupManageModule extends Module{
                     return (GroupManage::Load($event->groupId)->enableWelcomeMsg(false)->save())!==false?
                         $event->sendBack('设置成功'):q('设置失败');
                 case '启用退群提示':
-                    return (GroupManage::Load($event->groupId)->enableWelcomeMsg()->save())!==false?
+                    return (GroupManage::Load($event->groupId)->enableLeaveMsg()->save())!==false?
                         $event->sendBack('设置成功'):q('设置失败');
                 case '禁用退群提示':
-                    return (GroupManage::Load($event->groupId)->enableWelcomeMsg(false)->save())!==false?
+                    return (GroupManage::Load($event->groupId)->enableLeaveMsg(false)->save())!==false?
                         $event->sendBack('设置成功'):q('设置失败');
                 default:
                     q('未知的匹配模式');
